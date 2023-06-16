@@ -5,7 +5,6 @@ from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, F
 from game.components.spaceship import Spaceship
 
 
-
 class Game:
     def __init__(self):
         pygame.init()
