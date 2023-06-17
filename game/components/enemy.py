@@ -20,7 +20,7 @@ class Enemy(Sprite):
 
     def update(self, playing):
         self.move_vertical(playing)
-        self.move_horizontal(playing)
+
 
     def move_vertical(self, playing):
         if playing:
@@ -30,13 +30,7 @@ class Enemy(Sprite):
                 self.rect.x = random.randint(0, SCREEN_WIDTH)
             elif self.rect.y < 0:
                 self.rect.y = SCREEN_HEIGHT 
-    
-    def move_horizontal(self, playing):
-        if playing:
-                      
-            self.rect.x += self.speed
-            if self.rect.x > SCREEN_WIDTH:
-                self.rect.x = 0
-            elif self.rect.x < 0:
-                self.rect.x = SCREEN_WIDTH    
+
+        
+
 

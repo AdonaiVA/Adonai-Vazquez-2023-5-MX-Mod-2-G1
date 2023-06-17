@@ -19,7 +19,11 @@ class Game:
         self.x_pos_bg = 0
         self.y_pos_bg = 0
         self.spaceship = Spaceship()
-        self.enemy = Enemy()
+        self.enemies = {Enemy(),
+                        Enemy(),
+                        Enemy(),
+                        Enemy(),
+                        }
 
     def run(self):
         # Game loop: events - update - draw
@@ -42,16 +46,21 @@ class Game:
     def update(self):
         events = pygame.key.get_pressed()
         self.spaceship.update(events) 
-        self.enemy.update(self.playing)
+
+        for enemy in self.enemies:
+            enemy.update(self.playing)
 
     def draw(self):
         self.clock.tick(FPS) # configuro cuantos frames per second voy a dibujar
         self.screen.fill((255, 255, 255)) # lleno el screen de color BLANCO???? 255, 255, 255 es el codigo RGB
         
         self.draw_background()
-
-        self.enemy.draw(self.screen)
+        
         self.spaceship.draw(self.screen)
+
+        for enemy in self.enemies:
+            enemy.draw(self.screen)
+        
 
         pygame.display.update() # esto hace que el dibujo se actualice en el display de pygame
         pygame.display.flip()  # hace el cambio
