@@ -53,8 +53,6 @@ class Game:
         self.enemy.draw(self.screen)
         self.spaceship.draw(self.screen)
 
-
-
         pygame.display.update() # esto hace que el dibujo se actualice en el display de pygame
         pygame.display.flip()  # hace el cambio
 
