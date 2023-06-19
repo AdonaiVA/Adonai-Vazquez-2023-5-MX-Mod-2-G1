@@ -19,10 +19,11 @@ class Game:
         self.x_pos_bg = 0
         self.y_pos_bg = 0
         self.spaceship = Spaceship()
-        self.enemies = {Enemy(),
-                        Enemy(),
-                        Enemy(),
-                        Enemy(),
+        self.enemies = {
+                        Enemy("Horizontal"),
+                        Enemy("Vertical"),
+                        Enemy("Horizontal"),
+                        Enemy("Vertical"),
                         }
 
     def run(self):
