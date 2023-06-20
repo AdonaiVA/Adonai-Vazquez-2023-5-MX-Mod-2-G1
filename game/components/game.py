@@ -2,7 +2,7 @@ import pygame
 
 from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE
 
-from game.components.spaceship import Spaceship
+from game.components.spaceship.spaceship import Spaceship
 
 from game.components.enemy.enemy_handler import EnemyHandler
 
@@ -39,11 +39,15 @@ class Game:
             if event.type == pygame.QUIT: #el QUIT event es el click en el icono que cierra ventana
                 self.playing = False
 
+
     def update(self):
         events = pygame.key.get_pressed()
-        self.spaceship.update(events) 
-
+        self.spaceship.update(events)
         self.enemies_handler.update()
+
+        collision = pygame.sprite.spritecollideany(self.spaceship.bullets, self.enemies_handler.enemies, True)
+        if collision:
+            print("1")
 
     def draw(self):
         self.clock.tick(FPS) # configuro cuantos frames per second voy a dibujar

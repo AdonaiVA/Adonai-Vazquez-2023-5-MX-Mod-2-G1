@@ -1,4 +1,6 @@
-import random
+import random, pygame
+
+from game.components.spaceship.bullet import Bullet
 
 from game.components.enemy.enemy_ship import EnemyShip
 
