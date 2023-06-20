@@ -28,6 +28,6 @@ BULLET_SOUND = pygame.mixer.Sound(os.path.join(IMG_DIR, "Sounds/laser.wav"))
 BULLET_ENEMY = pygame.image.load(os.path.join(IMG_DIR, "Bullet/bullet_2.png"))
 ENEMY_1 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_1.png"))
 ENEMY_2 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_2.png"))
-ENEMY_EXPLOSION = pygame.mixer.Sound(os.path.join(IMG_DIR, "Sounds/explosion.wav"))
+ENEMY_SOUND = pygame.mixer.Sound(os.path.join(IMG_DIR, "Sounds/explosion.wav"))
 
 FONT_STYLE = 'freesansbold.ttf'

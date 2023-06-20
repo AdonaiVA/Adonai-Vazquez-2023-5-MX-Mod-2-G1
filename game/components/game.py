@@ -49,6 +49,7 @@ class Game:
                 if enemy.rect.colliderect(bullet.rect):
                     enemy.sound.play()
                     
+                    
 
     def draw(self):
         self.clock.tick(FPS) # configuro cuantos frames per second voy a dibujar
