@@ -2,7 +2,7 @@ import pygame
 
 from pygame.sprite import Sprite
 
-from game.utils.constants import BULLET
+from game.utils.constants import BULLET, BULLET_SOUND
 
 class Bullet(Sprite):
     def __init__(self, rect_spaceship):
@@ -15,6 +15,7 @@ class Bullet(Sprite):
         self.rect.y = rect_spaceship.y
         self.speed = 10
         self.available = True
+        self.sound = BULLET_SOUND
 
     def update(self):
         self.move()

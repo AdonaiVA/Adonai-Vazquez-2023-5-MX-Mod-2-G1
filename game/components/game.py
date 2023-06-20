@@ -45,10 +45,6 @@ class Game:
         self.spaceship.update(events)
         self.enemies_handler.update()
 
-        collision = pygame.sprite.spritecollideany(self.spaceship.bullets, self.enemies_handler.enemies, True)
-        if collision:
-            print("1")
-
     def draw(self):
         self.clock.tick(FPS) # configuro cuantos frames per second voy a dibujar
         self.screen.fill((255, 255, 255)) # lleno el screen de color BLANCO???? 255, 255, 255 es el codigo RGB

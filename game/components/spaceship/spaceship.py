@@ -55,6 +55,7 @@ class Spaceship(Sprite):
         if keyboard_events[pygame.K_SPACE]:
             bullet = Bullet(self.rect)
             self.bullets.append(bullet)
+            bullet.sound.play()
     
     def update_bullets(self):
         for bullet in self.bullets:
