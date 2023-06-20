@@ -4,7 +4,7 @@ from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, F
 
 from game.components.spaceship import Spaceship
 
-from game.components.enemy import Enemy
+from game.components.enemy.enemy_handler import EnemyHandler
 
 
 class Game:
@@ -19,12 +19,7 @@ class Game:
         self.x_pos_bg = 0
         self.y_pos_bg = 0
         self.spaceship = Spaceship()
-        self.enemies = {
-                        Enemy("Horizontal"),
-                        Enemy("Vertical"),
-                        Enemy("Horizontal"),
-                        Enemy("Vertical"),
-                        }
+        self.enemies_handler = EnemyHandler()
 
     def run(self):
         # Game loop: events - update - draw
@@ -48,8 +43,7 @@ class Game:
         events = pygame.key.get_pressed()
         self.spaceship.update(events) 
 
-        for enemy in self.enemies:
-            enemy.update(self.playing)
+        self.enemies_handler.update()
 
     def draw(self):
         self.clock.tick(FPS) # configuro cuantos frames per second voy a dibujar
@@ -59,8 +53,7 @@ class Game:
         
         self.spaceship.draw(self.screen)
 
-        for enemy in self.enemies:
-            enemy.draw(self.screen)
+        self.enemies_handler.draw(self.screen)
         
 
         pygame.display.update() # esto hace que el dibujo se actualice en el display de pygame
