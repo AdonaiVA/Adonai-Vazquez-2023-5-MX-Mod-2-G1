@@ -44,6 +44,11 @@ class Game:
         events = pygame.key.get_pressed()
         self.spaceship.update(events)
         self.enemies_handler.update()
+        for enemy in self.enemies_handler.enemies:
+            for bullet in self.spaceship.bullets:
+                if enemy.rect.colliderect(bullet.rect):
+                    enemy.sound.play()
+                    
 
     def draw(self):
         self.clock.tick(FPS) # configuro cuantos frames per second voy a dibujar
