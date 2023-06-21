@@ -1,6 +1,6 @@
-import random
+import random, pygame
 
-from game.utils.constants import SCREEN_HEIGHT, SCREEN_WIDTH
+from game.utils.constants import SCREEN_HEIGHT, SCREEN_WIDTH, BULLET_SOUND, BULLET_ENEMY
 
 from game.components.enemy.enemy_bullet import Bullet
 
@@ -24,9 +24,12 @@ class Enemy:
         if self.rect.y >= SCREEN_HEIGHT:
             self.is_alive = False
         self.move()
+        self.shoot()
 
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
+        for bullet in self.bullets:
+            screen.blit(bullet.image, bullet.rect)
 
     def move(self):
         if self.mov_x == self.RIGHT:
@@ -41,5 +44,10 @@ class Enemy:
                 self.rect.y += self.speed_y
                 self.mov_x = self.RIGHT
                 self.index += 1
-        
 
+    def shoot(self):
+        index = 0
+        for bullet in self.bullets:
+            bullet = Bullet(self.rect)
+            self.bullets.append(bullet)
+            index += 1

@@ -48,7 +48,7 @@ class Game:
             for bullet in self.spaceship.bullets:
                 if enemy.rect.colliderect(bullet.rect):
                     enemy.sound.play()
-                    
+                    enemy.is_alive = False
                     
 
     def draw(self):
