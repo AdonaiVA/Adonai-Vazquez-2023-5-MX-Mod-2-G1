@@ -1,8 +1,8 @@
-import random, pygame
-
-from game.utils.constants import SCREEN_HEIGHT, SCREEN_WIDTH, BULLET_SOUND, BULLET_ENEMY
+import random
 
 from game.components.enemy.enemy_bullet import Bullet
+
+from game.utils.constants import SCREEN_HEIGHT, SCREEN_WIDTH
 
 class Enemy:
     def __init__ (self, image):
@@ -17,7 +17,6 @@ class Enemy:
         self.mov_x = random.choice([self.LEFT, self.RIGHT])
         self.is_alive = True
         self.index = 0
-        self.timer = 3000
         self.bullets = []
 
     def update(self):
@@ -25,7 +24,7 @@ class Enemy:
             self.is_alive = False
         self.move()
         self.shoot()
-
+    
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
         for bullet in self.bullets:
@@ -44,10 +43,17 @@ class Enemy:
                 self.rect.y += self.speed_y
                 self.mov_x = self.RIGHT
                 self.index += 1
-
+    
     def shoot(self):
-        index = 0
-        for bullet in self.bullets:
+        if random.randrange(0, 100) == 1:
             bullet = Bullet(self.rect)
             self.bullets.append(bullet)
-            index += 1
+
+        for bullet in self.bullets:
+            bullet.update()
+            if not bullet.available:
+                self.bullets.remove(bullet)
+
+
+
+

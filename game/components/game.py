@@ -6,6 +6,7 @@ from game.components.spaceship.spaceship import Spaceship
 
 from game.components.enemy.enemy_handler import EnemyHandler
 
+from game.components.handle_colision import HandleColision
 
 class Game:
     def __init__(self):
@@ -20,6 +21,7 @@ class Game:
         self.y_pos_bg = 0
         self.spaceship = Spaceship()
         self.enemies_handler = EnemyHandler()
+        self.colision = HandleColision(self.spaceship.bullets, self.enemies_handler.enemies)
 
     def run(self):
         # Game loop: events - update - draw
@@ -44,11 +46,7 @@ class Game:
         events = pygame.key.get_pressed()
         self.spaceship.update(events)
         self.enemies_handler.update()
-        for enemy in self.enemies_handler.enemies:
-            for bullet in self.spaceship.bullets:
-                if enemy.rect.colliderect(bullet.rect):
-                    enemy.sound.play()
-                    enemy.is_alive = False
+        self.colision.collision()
                     
 
     def draw(self):

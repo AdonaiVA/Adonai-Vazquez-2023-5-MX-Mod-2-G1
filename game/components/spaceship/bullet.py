@@ -20,17 +20,8 @@ class Bullet(Sprite):
     def update(self):
         self.move()
 
+
     def move(self):
         self.rect.y -= self.speed
         if self.rect.bottom <= 0:
             self.available = False
-            return self.available
-        else:
-            return self.available
-        
-
-        
-    
-
-    
-

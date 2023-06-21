@@ -23,7 +23,3 @@ class Bullet(Sprite):
         self.rect.y += self.speed
         if self.rect.bottom >= SCREEN_HEIGHT:
             self.available = False
-            return self.available
-        else:
-            return self.available
-        

@@ -57,11 +57,12 @@ class Spaceship(Sprite):
             self.bullets.append(bullet)
             bullet.sound.play()
             
-    
     def update_bullets(self):
         for bullet in self.bullets:
-            if bullet.update():
+            bullet.update()
+            if not bullet.available:
                 self.bullets.remove(bullet)
+
 
 
     
