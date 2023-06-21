@@ -45,7 +45,7 @@ class Enemy:
                 self.index += 1
     
     def shoot(self):
-        if random.randrange(0, 100) == 1:
+        if random.randrange(0, 10) == 1:
             bullet = Bullet(self.rect)
             self.bullets.append(bullet)
 

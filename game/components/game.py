@@ -8,6 +8,8 @@ from game.components.enemy.enemy_handler import EnemyHandler
 
 from game.components.handle_colision import HandleColision
 
+from game.components.display.score import Score
+
 class Game:
     def __init__(self):
         pygame.init()
@@ -21,7 +23,9 @@ class Game:
         self.y_pos_bg = 0
         self.spaceship = Spaceship()
         self.enemies_handler = EnemyHandler()
-        self.colision = HandleColision(self.spaceship.bullets, self.enemies_handler.enemies)
+        self.colision = HandleColision(self.spaceship, self.enemies_handler)
+        self.score = Score(self.colision.score)
+
 
     def run(self):
         # Game loop: events - update - draw
@@ -41,12 +45,12 @@ class Game:
             if event.type == pygame.QUIT: #el QUIT event es el click en el icono que cierra ventana
                 self.playing = False
 
-
     def update(self):
         events = pygame.key.get_pressed()
         self.spaceship.update(events)
         self.enemies_handler.update()
-        self.colision.collision()
+        self.colision.collision_bullet_enemy()
+        self.score.update(self.colision.score)
                     
 
     def draw(self):
@@ -58,7 +62,8 @@ class Game:
         self.spaceship.draw(self.screen)
 
         self.enemies_handler.draw(self.screen)
-        
+
+        self.score.draw(self.screen)
 
         pygame.display.update() # esto hace que el dibujo se actualice en el display de pygame
         pygame.display.flip()  # hace el cambio
