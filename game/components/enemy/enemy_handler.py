@@ -26,3 +26,4 @@ class EnemyHandler:
         
     def remove_enemy(self,enemy):
         self.enemies.remove(enemy)
+    

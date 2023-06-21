@@ -1,10 +1,10 @@
 import pygame
 
-from pygame import mixer_music
-
 from pygame.sprite import Sprite
 
 from game.components.spaceship.bullet import Bullet
+
+from game.components.spaceship.heart import Heart
 
 from game.utils.constants import SPACESHIP, SCREEN_HEIGHT, SCREEN_WIDTH
 
@@ -19,12 +19,16 @@ class Spaceship(Sprite):
         self.rect.y =  SCREEN_HEIGHT - self.height
         self.speed = 10
         self.bullets = []
+        self.lives = 3
+        self.is_alive = True
+        self.heart = Heart()
 
 
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
         for bullet in self.bullets:
             screen.blit(bullet.image, bullet.rect)
+        self.heart.draw(screen)
 
     def update(self, keyboard_events):
         self.move_left(keyboard_events)
@@ -33,7 +37,6 @@ class Spaceship(Sprite):
         self.move_down(keyboard_events)
         self.shoot(keyboard_events)
         self.update_bullets()
-
         
     def move_left(self, keyboard_events):   
         if keyboard_events[pygame.K_LEFT] and self.rect.x > 0:
@@ -62,9 +65,8 @@ class Spaceship(Sprite):
             bullet.update()
             if not bullet.available:
                 self.bullets.remove(bullet)
-
-
-
     
-
+    def reset(self):
+        self.is_alive = True
+        self.lives = 3
 
