@@ -1,12 +1,12 @@
 import pygame
 
-from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE
+from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
 
 from game.components.spaceship.spaceship import Spaceship
 
 from game.components.enemy.enemy_handler import EnemyHandler
 
-from game.components.handle_events.handle_colision import HandleColision
+from game.components.handle_events.handle_colision import HandleEvents
 
 from game.components.display.score import Score
 
@@ -26,7 +26,7 @@ class Game:
         self.y_pos_bg = 0
         self.spaceship = Spaceship()
         self.enemies_handler = EnemyHandler()
-        self.colision = HandleColision(self.spaceship, self.enemies_handler, self.playing)
+        self.events = HandleEvents(self.spaceship, self.enemies_handler, self.playing)
         self.score = Score()
         self.game_over_screen = GameOver()
 
@@ -57,12 +57,15 @@ class Game:
         self.spaceship.update(events)
         self.enemies_handler.update()
 
-        self.colision.collision_bullet_enemy()
-        self.colision.collision_bullet_starship()
-        self.colision.update_high_score()
+        self.events.collision_bullet_enemy()
+        self.events.collision_bullet_starship()
+        self.events.collision_enemy_spaceship()
+        self.events.collision_shield_enemy()
+        self.events.update_high_score()
+        self.events.check_shield()
 
-        self.score.update(self.colision.score)
-        self.colision.check_game_over()
+        self.score.update(self.events.score)
+        self.events.check_game_over()
         print(self.spaceship.lives)
         if not self.spaceship.is_alive:
             self.game_over = True
@@ -71,16 +74,13 @@ class Game:
     def draw(self):
 
         self.clock.tick(FPS) # configuro cuantos frames per second voy a dibujar            self.screen.fill((255, 255, 255)) # lleno el screen de color BLANCO???? 255, 255, 255 es el codigo RGB
-        
         self.draw_background()            
         
-
-
         if self.game_over:
             self.game_over_screen.draw(self.screen)
             self.game_over_screen.draw_score(self.screen, self.score.record)
-            self.game_over_screen.draw_enemies(self.screen, self.colision.enemies_deleted)
-            self.game_over_screen.draw_high_score(self.screen, self.colision.high_score)
+            self.game_over_screen.draw_enemies(self.screen, self.events.enemies_deleted)
+            self.game_over_screen.draw_high_score(self.screen, self.events.high_score)
         else:
             self.spaceship.draw(self.screen)
             self.enemies_handler.draw(self.screen)
@@ -104,6 +104,6 @@ class Game:
         self.playing = True
         self.game_over = False
         self.spaceship.reset()
-        self.colision.reset_score()
-        self.colision.reset_enemies()
+        self.events.reset_score()
+        self.events.reset_enemies()
         self.enemies_handler.reset_enemies()

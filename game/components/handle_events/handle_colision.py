@@ -1,4 +1,4 @@
-class HandleColision:
+class HandleEvents:
     def __init__(self, starship, enemies, game_over_condition):
         self.starship = starship
         self.enemies = enemies
@@ -21,10 +21,24 @@ class HandleColision:
     def collision_bullet_starship(self):
         for enemy in self.enemies.enemies:
             for bullet in enemy.bullets:
-
                 if bullet.rect.colliderect(self.starship):
                     enemy.bullets.remove(bullet)
                     self.starship.lives -= 1
+                elif bullet.rect.colliderect(self.starship.shield):
+                    enemy.bullets.remove(bullet)
+
+    def collision_enemy_spaceship(self):
+        for enemy in self.enemies.enemies:
+            if enemy.rect.colliderect(self.starship):
+                self.starship.lives -= 1
+                enemy.sound.play()
+                enemy.is_alive = False
+    
+    def collision_shield_enemy(self):
+        for enemy in self.enemies.enemies:
+            if enemy.rect.colliderect(self.starship.shield):
+                enemy.sound.play()
+                enemy.is_alive = False
 
     def check_game_over(self):
         if self.starship.lives == 0:
@@ -34,7 +48,11 @@ class HandleColision:
     def update_high_score(self):
         if self.high_score < self.score:
             self.high_score = self.score
-    
+
+    def check_shield(self):
+        if self.enemies_deleted % 15 == 0:
+            self.starship.have_shield = True
+
     def reset_score(self):
         self.score = 0
 

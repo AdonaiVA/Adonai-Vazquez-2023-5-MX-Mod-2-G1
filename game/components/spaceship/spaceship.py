@@ -1,10 +1,12 @@
-import pygame
+import pygame, random
 
 from pygame.sprite import Sprite
 
 from game.components.spaceship.bullet import Bullet
 
 from game.components.spaceship.heart import Heart
+
+from game.components.spaceship.shield import Shield
 
 from game.utils.constants import SPACESHIP, SCREEN_HEIGHT, SCREEN_WIDTH
 
@@ -21,14 +23,19 @@ class Spaceship(Sprite):
         self.bullets = []
         self.lives = 3
         self.is_alive = True
-        self.heart = Heart()
-
+        self.hearts = [Heart(10), Heart(40), Heart(70)]
+        self.shield = Shield()
+        self.have_shield = False
 
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
         for bullet in self.bullets:
             screen.blit(bullet.image, bullet.rect)
-        self.heart.draw(screen)
+        for heart in self.hearts:
+            heart.draw(screen)
+        if self.have_shield == True:
+            self.shield.draw(screen)
+
 
     def update(self, keyboard_events):
         self.move_left(keyboard_events)
@@ -37,6 +44,9 @@ class Spaceship(Sprite):
         self.move_down(keyboard_events)
         self.shoot(keyboard_events)
         self.update_bullets()
+        self.update_hearts()
+        self.update_shield()
+
         
     def move_left(self, keyboard_events):   
         if keyboard_events[pygame.K_LEFT] and self.rect.x > 0:
@@ -66,7 +76,19 @@ class Spaceship(Sprite):
             if not bullet.available:
                 self.bullets.remove(bullet)
     
+    def update_hearts(self):
+        if self.lives == 2 and len(self.hearts) >= 3:
+            self.hearts.pop()
+        elif self.lives == 1 and len(self.hearts) >= 2:
+            self.hearts.pop()
+    
+    def update_shield(self):
+        if random.randrange(0,200) == 1:
+            self.have_shield = False
+            
     def reset(self):
         self.is_alive = True
         self.lives = 3
+        self.hearts = [Heart(10), Heart(40), Heart(70)]
+        
 
