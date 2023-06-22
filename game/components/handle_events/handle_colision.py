@@ -24,6 +24,7 @@ class HandleEvents:
                 if bullet.rect.colliderect(self.starship):
                     enemy.bullets.remove(bullet)
                     self.starship.lives -= 1
+                    self.starship.explosion_sound.play()
                 elif bullet.rect.colliderect(self.starship.shield):
                     enemy.bullets.remove(bullet)
 

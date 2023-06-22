@@ -1,6 +1,6 @@
 import pygame
 
-from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
+from game.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, START_SOUND
 
 from game.components.spaceship.spaceship import Spaceship
 
@@ -29,6 +29,7 @@ class Game:
         self.events = HandleEvents(self.spaceship, self.enemies_handler, self.playing)
         self.score = Score()
         self.game_over_screen = GameOver()
+        self.sound = START_SOUND
 
     def run(self):
         # Game loop: events - update - draw
@@ -51,10 +52,11 @@ class Game:
 
             if self.game_over and event.type == pygame.KEYDOWN:
                 self.restart_game()
+                self.sound.play()
 
     def update(self):
         if self.game_over:
-            return
+            self.game_over_screen.game_over_sound.play()
         else:
             events = pygame.key.get_pressed()
             self.spaceship.update(events)

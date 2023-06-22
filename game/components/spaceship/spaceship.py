@@ -8,7 +8,7 @@ from game.components.spaceship.heart import Heart
 
 from game.components.spaceship.shield import Shield
 
-from game.utils.constants import SPACESHIP, SCREEN_HEIGHT, SCREEN_WIDTH
+from game.utils.constants import SPACESHIP, SCREEN_HEIGHT, SCREEN_WIDTH, SPACESHIP_EXPLOSION
 
 class Spaceship(Sprite):
     def __init__(self):
@@ -26,6 +26,7 @@ class Spaceship(Sprite):
         self.hearts = [Heart(10), Heart(40), Heart(70)]
         self.shield = Shield()
         self.have_shield = False
+        self.explosion_sound = SPACESHIP_EXPLOSION
 
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))

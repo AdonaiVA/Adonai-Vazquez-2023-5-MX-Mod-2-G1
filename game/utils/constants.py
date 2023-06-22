@@ -17,6 +17,10 @@ BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
 
 HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/Batery.png'))
 
+START_SOUND = pygame.mixer.Sound(os.path.join(IMG_DIR, "Sounds/start_sound.wav"))
+
+GAME_OVER_SOUND = pygame.mixer.Sound(os.path.join(IMG_DIR, "Sounds/game_over_sound.wav"))
+
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = 'shield'
 
@@ -24,10 +28,12 @@ SPACESHIP = pygame.image.load(os.path.join(IMG_DIR, "Spaceship/spaceship.png"))
 SPACESHIP_SHIELD = pygame.image.load(os.path.join(IMG_DIR, "Spaceship/spaceship_shield.png"))
 BULLET = pygame.image.load(os.path.join(IMG_DIR, "Bullet/bullet_1.png"))
 BULLET_SOUND = pygame.mixer.Sound(os.path.join(IMG_DIR, "Sounds/laser.wav"))
+SPACESHIP_EXPLOSION = pygame.mixer.Sound(os.path.join(IMG_DIR, "Sounds/player_explosion.wav"))
 
 BULLET_ENEMY = pygame.image.load(os.path.join(IMG_DIR, "Bullet/bullet_2.png"))
 ENEMY_1 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_1.png"))
 ENEMY_2 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_2.png"))
 ENEMY_SOUND = pygame.mixer.Sound(os.path.join(IMG_DIR, "Sounds/explosion.wav"))
+ENEMY_SHOOT_SOUND = pygame.mixer.Sound(os.path.join(IMG_DIR, "Sounds/enemy_laser.wav"))
 
 FONT_STYLE = 'freesansbold.ttf'

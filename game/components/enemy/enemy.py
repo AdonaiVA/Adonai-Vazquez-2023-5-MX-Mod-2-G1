@@ -2,7 +2,7 @@ import random
 
 from game.components.enemy.enemy_bullet import Bullet
 
-from game.utils.constants import SCREEN_HEIGHT, SCREEN_WIDTH
+from game.utils.constants import SCREEN_HEIGHT, SCREEN_WIDTH, ENEMY_SHOOT_SOUND
 
 class Enemy:
     def __init__ (self, image):
@@ -18,6 +18,7 @@ class Enemy:
         self.is_alive = True
         self.index = 0
         self.bullets = []
+        self.sound = ENEMY_SHOOT_SOUND
 
     def update(self):
         if self.rect.y >= SCREEN_HEIGHT:
@@ -48,6 +49,7 @@ class Enemy:
         if random.randrange(0, 10) == 1:
             bullet = Bullet(self.rect)
             self.bullets.append(bullet)
+            #self.sound.play()
 
         for bullet in self.bullets:
             bullet.update()

@@ -1,6 +1,6 @@
 import pygame
 
-from game.utils.constants import FONT_STYLE, SCREEN_HEIGHT, SCREEN_WIDTH
+from game.utils.constants import FONT_STYLE, SCREEN_HEIGHT, SCREEN_WIDTH, GAME_OVER_SOUND
 
 class GameOver:
     def __init__(self):
@@ -10,6 +10,7 @@ class GameOver:
         self.text_height = self.text.get_height()
         self.text_x = (SCREEN_WIDTH // 2) - (self.text_width // 2) 
         self.text_y = (SCREEN_HEIGHT // 2) - (self.text_height)
+        self.game_over_sound = GAME_OVER_SOUND
         
     def draw(self,screen):
         screen.blit(self.text,(self.text_x, self.text_y))
