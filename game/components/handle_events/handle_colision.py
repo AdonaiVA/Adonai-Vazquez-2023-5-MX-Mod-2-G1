@@ -5,6 +5,7 @@ class HandleColision:
         self.game_over_condition = game_over_condition
         self.score = 0
         self.enemies_deleted = 0
+        self.high_score = 0
 
     
     def collision_bullet_enemy(self):
@@ -29,6 +30,10 @@ class HandleColision:
         if self.starship.lives == 0:
             self.starship.is_alive = False
             self.game_over_condition = True
+
+    def update_high_score(self):
+        if self.high_score < self.score:
+            self.high_score = self.score
     
     def reset_score(self):
         self.score = 0

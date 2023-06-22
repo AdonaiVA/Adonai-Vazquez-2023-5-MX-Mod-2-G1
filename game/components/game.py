@@ -38,7 +38,6 @@ class Game:
             self.update()
             self.draw()
         else:
-            self.game_over = True
             print("Something occurred to quit the game!")
             
         pygame.display.quit()
@@ -60,10 +59,11 @@ class Game:
 
         self.colision.collision_bullet_enemy()
         self.colision.collision_bullet_starship()
+        self.colision.update_high_score()
 
         self.score.update(self.colision.score)
         self.colision.check_game_over()
-        
+        print(self.spaceship.lives)
         if not self.spaceship.is_alive:
             self.game_over = True
 
@@ -74,16 +74,17 @@ class Game:
         
         self.draw_background()            
         
-        self.spaceship.draw(self.screen)
 
-        self.enemies_handler.draw(self.screen)
-
-        self.score.draw(self.screen)
 
         if self.game_over:
             self.game_over_screen.draw(self.screen)
             self.game_over_screen.draw_score(self.screen, self.score.record)
             self.game_over_screen.draw_enemies(self.screen, self.colision.enemies_deleted)
+            self.game_over_screen.draw_high_score(self.screen, self.colision.high_score)
+        else:
+            self.spaceship.draw(self.screen)
+            self.enemies_handler.draw(self.screen)
+            self.score.draw(self.screen)
 
         pygame.display.update() # esto hace que el dibujo se actualice en el display de pygame
         pygame.display.flip()  # hace el cambio
@@ -105,3 +106,4 @@ class Game:
         self.spaceship.reset()
         self.colision.reset_score()
         self.colision.reset_enemies()
+        self.enemies_handler.reset_enemies()

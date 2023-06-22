@@ -26,4 +26,8 @@ class EnemyHandler:
         
     def remove_enemy(self,enemy):
         self.enemies.remove(enemy)
+
+    def reset_enemies(self):
+        for enemy in self.enemies:
+            self.enemies.remove(enemy)
     

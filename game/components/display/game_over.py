@@ -23,3 +23,8 @@ class GameOver:
         enemy_deleted = self.font.render(f'Enemy deleted: {enemies}', True, (255,255,255))
         enemy_deleted_width = enemy_deleted.get_width()
         screen.blit(enemy_deleted, ((SCREEN_WIDTH // 2) - (enemy_deleted_width // 2), self.text_y + (self.text_height * 2)))
+    
+    def draw_high_score(self, screen, max_score):
+        score_text = self.font.render(f'Score: {max_score}', True, (255, 255, 255))
+        score_text_width = score_text.get_width()
+        screen.blit(score_text, ((SCREEN_WIDTH // 2) - (score_text_width // 2), self.text_y + (self.text_height * 3)))
