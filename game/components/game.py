@@ -104,3 +104,4 @@ class Game:
         self.game_over = False
         self.spaceship.reset()
         self.colision.reset_score()
+        self.colision.reset_enemies()
