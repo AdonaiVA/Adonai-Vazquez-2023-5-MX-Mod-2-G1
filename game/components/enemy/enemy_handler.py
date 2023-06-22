@@ -29,5 +29,5 @@ class EnemyHandler:
 
     def reset_enemies(self):
         for enemy in self.enemies:
-            self.enemies.remove(enemy)
+            enemy.is_alive = False
     

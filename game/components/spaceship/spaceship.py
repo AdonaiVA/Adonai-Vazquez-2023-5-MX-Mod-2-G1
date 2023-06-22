@@ -34,7 +34,7 @@ class Spaceship(Sprite):
             screen.blit(bullet.image, bullet.rect)
         for heart in self.hearts:
             heart.draw(screen)
-        if self.have_shield == True:
+        if self.have_shield == True:   
             self.shield.draw(screen)
 
 
@@ -46,7 +46,8 @@ class Spaceship(Sprite):
         self.shoot(keyboard_events)
         self.update_bullets()
         self.update_hearts()
-        self.update_shield()
+        if self.have_shield == True:    
+            self.update_shield()
 
         
     def move_left(self, keyboard_events):   
@@ -86,6 +87,7 @@ class Spaceship(Sprite):
     def update_shield(self):
         if random.randrange(0,200) == 1:
             self.have_shield = False
+
             
     def reset(self):
         self.is_alive = True

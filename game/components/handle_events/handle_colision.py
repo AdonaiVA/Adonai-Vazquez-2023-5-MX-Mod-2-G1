@@ -25,22 +25,24 @@ class HandleEvents:
                     enemy.bullets.remove(bullet)
                     self.starship.lives -= 1
                     self.starship.explosion_sound.play()
-                elif bullet.rect.colliderect(self.starship.shield):
+                elif self.starship.have_shield == True and bullet.rect.colliderect(self.starship.shield):
                     enemy.bullets.remove(bullet)
 
     def collision_enemy_spaceship(self):
         for enemy in self.enemies.enemies:
             if enemy.rect.colliderect(self.starship):
                 self.starship.lives -= 1
+                self.starship.explosion_sound.play()
                 enemy.sound.play()
                 enemy.is_alive = False
     
     def collision_shield_enemy(self):
-        for enemy in self.enemies.enemies:
-            if enemy.rect.colliderect(self.starship.shield):
-                enemy.sound.play()
-                enemy.is_alive = False
-                self.enemies_deleted += 1
+        if self.starship.have_shield == True:
+            for enemy in self.enemies.enemies:
+                if enemy.rect.colliderect(self.starship.shield):
+                    enemy.sound.play()
+                    enemy.is_alive = False
+                    self.enemies_deleted += 1
 
     def check_game_over(self):
         if self.starship.lives == 0:
