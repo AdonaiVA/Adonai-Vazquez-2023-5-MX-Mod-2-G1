@@ -81,7 +81,9 @@ class Game:
         self.score.draw(self.screen)
 
         if self.game_over:
-            self.game_over_screen.draw(self.screen, self.score.record, self.colision.enemies_deleted)
+            self.game_over_screen.draw(self.screen)
+            self.game_over_screen.draw_score(self.screen, self.score.record)
+            self.game_over_screen.draw_enemies(self.screen, self.colision.enemies_deleted)
 
         pygame.display.update() # esto hace que el dibujo se actualice en el display de pygame
         pygame.display.flip()  # hace el cambio
