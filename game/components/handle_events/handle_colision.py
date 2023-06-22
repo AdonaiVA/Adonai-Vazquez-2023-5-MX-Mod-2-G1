@@ -39,6 +39,7 @@ class HandleEvents:
             if enemy.rect.colliderect(self.starship.shield):
                 enemy.sound.play()
                 enemy.is_alive = False
+                self.enemies_deleted += 1
 
     def check_game_over(self):
         if self.starship.lives == 0:

@@ -53,22 +53,25 @@ class Game:
                 self.restart_game()
 
     def update(self):
-        events = pygame.key.get_pressed()
-        self.spaceship.update(events)
-        self.enemies_handler.update()
+        if self.game_over:
+            return
+        else:
+            events = pygame.key.get_pressed()
+            self.spaceship.update(events)
+            self.enemies_handler.update()
 
-        self.events.collision_bullet_enemy()
-        self.events.collision_bullet_starship()
-        self.events.collision_enemy_spaceship()
-        self.events.collision_shield_enemy()
-        self.events.update_high_score()
-        self.events.check_shield()
+            self.events.collision_bullet_enemy()
+            self.events.collision_bullet_starship()
+            self.events.collision_enemy_spaceship()
+            self.events.collision_shield_enemy()
+            self.events.update_high_score()
+            self.events.check_shield()
 
-        self.score.update(self.events.score)
-        self.events.check_game_over()
-        print(self.spaceship.lives)
-        if not self.spaceship.is_alive:
-            self.game_over = True
+            self.score.update(self.events.score)
+            self.events.check_game_over()
+            print(self.spaceship.lives)
+            if not self.spaceship.is_alive:
+                self.game_over = True
 
 
     def draw(self):
