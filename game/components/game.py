@@ -56,7 +56,6 @@ class Game:
 
     def update(self):
         if self.game_over:
-            self.game_over_screen.game_over_sound.play()
             return
         else:
             events = pygame.key.get_pressed()

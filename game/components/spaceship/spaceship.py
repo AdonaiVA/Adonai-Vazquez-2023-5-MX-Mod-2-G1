@@ -8,6 +8,8 @@ from game.components.spaceship.heart import Heart
 
 from game.components.spaceship.shield import Shield
 
+from game.components.spaceship.laser import MegaLaser
+
 from game.utils.constants import SPACESHIP, SCREEN_HEIGHT, SCREEN_WIDTH, SPACESHIP_EXPLOSION
 
 class Spaceship(Sprite):
@@ -36,7 +38,6 @@ class Spaceship(Sprite):
             heart.draw(screen)
         if self.have_shield == True:   
             self.shield.draw(screen)
-
 
     def update(self, keyboard_events):
         self.move_left(keyboard_events)
